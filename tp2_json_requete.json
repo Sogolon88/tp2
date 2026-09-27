@@ -1,0 +1,392 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "tp2_json_requete",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/api/calculator": {
+      "post": {
+        "summary": "calculatrice(Post addition)",
+        "parameters": [
+          {
+            "name": "Accept-Encoding",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "utf-8"
+          }
+        ],
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "integer"
+                  },
+                  "b": {
+                    "type": "integer"
+                  },
+                  "operation": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "a": 10,
+                "b": 5,
+                "operation": "addition"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/calculator/history": {
+      "get": {
+        "summary": "requete2( GET history)",
+        "responses": {}
+      }
+    },
+    "/api/calculator/1": {
+      "put": {
+        "summary": "mise a jour par PUT",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "integer"
+                  },
+                  "b": {
+                    "type": "integer"
+                  },
+                  "operation": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "a": 11,
+                "b": 20,
+                "operation": "multiplication"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "suppression DELETE",
+        "responses": {}
+      }
+    },
+    "/api/currency/convert": {
+      "get": {
+        "summary": "http://localhost:8080/api/currency/convert",
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 100
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "EUR"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "USD"
+          }
+        ],
+        "responses": {}
+      },
+      "post": {
+        "summary": "POST pour enregistrer manuellement",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "integer"
+                  },
+                  "date": {
+                    "type": "string",
+                    "format": "style"
+                  },
+                  "fromCurrency": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  },
+                  "rate": {
+                    "type": "integer"
+                  },
+                  "result": {
+                    "type": "integer"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "toCurrency": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "amount": 10000,
+                "date": "2026-09-26T20:50:30.4892831",
+                "fromCurrency": "GNF",
+                "id": 2,
+                "rate": 5,
+                "result": 50000,
+                "source": "Manual",
+                "toCurrency": "ECO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/currency/update-rate": {
+      "put": {
+        "summary": "modification d'un taux par PUT",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fromCurrency": {
+                    "type": "string"
+                  },
+                  "toCurrency": {
+                    "type": "string"
+                  },
+                  "rate": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "fromCurrency": "GNF",
+                "toCurrency": "ECO",
+                "rate": 656
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/currency/delete-transaction/2": {
+      "delete": {
+        "summary": "suppression d'une transaction par DELETE",
+        "responses": {}
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "summary": "enregistrer un user",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  }
+                }
+              },
+              "example": {
+                "username": "sogolon",
+                "password": "motdepasse123",
+                "email": "sogolon@example.com"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "generation de token",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "username": "sogolon",
+                "password": "motdepasse123"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bmi/history": {
+      "get": {
+        "summary": "requete des historiques",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bmi/calculate": {
+      "post": {
+        "summary": "faire un calcul de BMI",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "integer"
+                  },
+                  "weight": {
+                    "type": "integer"
+                  },
+                  "height": {
+                    "type": "number"
+                  }
+                }
+              },
+              "example": {
+                "userId": 1,
+                "weight": 85,
+                "height": 2.1
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bmi/update/1": {
+      "put": {
+        "summary": "mettre à jour par PUT d'un record BMI",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "integer"
+                  },
+                  "weight": {
+                    "type": "integer"
+                  },
+                  "height": {
+                    "type": "number"
+                  }
+                }
+              },
+              "example": {
+                "userId": 1,
+                "weight": 85,
+                "height": 1.71
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bmi/delete/1": {
+      "delete": {
+        "summary": "suppremer avec authorisation",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/bmi/delete": {
+      "delete": {
+        "summary": "une requete de suppression asans authentification",
+        "responses": {}
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
